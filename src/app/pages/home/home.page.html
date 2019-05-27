@@ -1,0 +1,195 @@
+<ion-content>
+
+    <ion-grid>
+
+        <ion-row>
+
+            <ion-col>
+                <ion-card style="background-color: orange; height: 210px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: white">Request Money</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content style="color: white">
+                        Ask for money from your friends and family.
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <ion-col>
+                <ion-card style="background-color: grey; height: 210px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: white">Send Money</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content style="color: white">
+                        Send money to your friends and family.
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+            <ion-col (click)="doo()">
+                <ion-card style="background-color: dodgerblue; height: 160px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: white">Buy Airtime</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content style="color: white">
+                        Airtel, Glo, MTN, 9mobile
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-card style="background-color: white; height: 230px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: black">
+                            <h5>PAY YOUR TV BILLS</h5>
+                        </ion-card-title>
+                    </ion-card-header>
+
+                    <ion-grid>
+
+                        <ion-row>
+                            <ion-card *ngFor="let biller of billers" style="background-color: grey; width: fit-content" (click)="onClickBiller(biller._id)">
+                                <ion-card-header>
+                                    <ion-card-title style="color: white">{{biller.biller_name}}</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+                        </ion-row>
+
+                    </ion-grid>
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-card style="background-color: white; height: 230px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: black">
+                            <h5>PAY YOUR INTERNET SUBSCRIPTION</h5>
+                        </ion-card-title>
+                    </ion-card-header>
+
+                    <ion-grid>
+
+                        <ion-row>
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">SWIFT</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">Smile</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: blue; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: white">Spectranet</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">ipNX</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+                        </ion-row>
+
+                    </ion-grid>
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-card style="background-color: white; height: 230px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: black">
+                            <h5>PAY YOUR UTILITY</h5>
+                        </ion-card-title>
+                    </ion-card-header>
+
+                    <ion-grid>
+
+                        <ion-row>
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">EKEDC</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">IBEDC</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">LCC</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+                        </ion-row>
+
+                    </ion-grid>
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-card style="background-color: white; height: 230px;">
+                    <ion-card-header>
+                        <ion-card-title style="color: black">
+                            <h5>PAY YOUR MOBILE DATA</h5>
+                        </ion-card-title>
+                    </ion-card-header>
+
+                    <ion-grid>
+
+                        <ion-row>
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">glo</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">9mobile</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: white; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">Airtel</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+
+                            <ion-card style="background-color: yellow; width: fit-content">
+                                <ion-card-header>
+                                    <ion-card-title style="color: black">MTN</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+                        </ion-row>
+
+                    </ion-grid>
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+
+</ion-content>

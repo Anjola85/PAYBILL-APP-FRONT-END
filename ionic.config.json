@@ -1,0 +1,8 @@
+{
+  "name": "payBills",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "a7799b6d"
+}
