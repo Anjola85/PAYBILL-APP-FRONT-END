@@ -13,7 +13,6 @@ import { AppService } from 'src/app/services/app-service.service';
 })
 export class HomePage implements OnInit {
     data = '';
-
     billers: any;
 
 
@@ -22,7 +21,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.appService.get('/api/billers?type=tv-bills').subscribe(res => {
+        this.appService.get('/api/billers?types=tv-bills').subscribe(res => {
             console.log('res:', res);
             if (res) {
               this.billers = res['data'];
@@ -39,13 +38,21 @@ export class HomePage implements OnInit {
 
 
     onClickBiller(id) {
-        console.log('bill id:', id);
-        this.router.navigate(['/packages/', id]);
+        console.log('bill_id:', id);
+        this.router.navigate(['/valid-info/', id]);
     }
 
     doo() {
         window.location.href = 'https://www.vtpass.com';
     }
+
+    // paymentDone(event) {
+    //     console.log('event:', event);
+    // }
+
+    // paymentCancel() {
+    //     console.log('close payment');
+    // }
 }
 
 export default HomePage;

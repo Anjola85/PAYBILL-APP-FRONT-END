@@ -9,6 +9,8 @@ const routes: Routes = [
   // tslint:disable-next-line:max-line-length
   { path: 'payment-gateway/:id/:amount/:biller_name/:name', loadChildren: './pages/payment-gateway/payment-gateway.module#PaymentGatewayPageModule' },
   { path: 'packages/:id', loadChildren: './pages/packages/dstv.module#DstvPageModule' },
+  { path: 'ionic', loadChildren: './pages/ionic/ionic.module#IonicPageModule' },
+  { path: 'valid-info/:id', loadChildren: './pages/valid-info/valid-info.module#ValidInfoPageModule' },
 ];
 
 @NgModule({

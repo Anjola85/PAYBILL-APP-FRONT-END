@@ -14,7 +14,7 @@ import {Storage, IonicStorageModule} from '@ionic/storage';
 import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {AppService} from './services/app-service.service';
 import {Angular4PaystackModule} from 'angular4-paystack';
-// import {InAppBrowser, InAppBrowserOriginal} from '@ionic-native/in-app-browser';
+// import {InAppBrowser, InAppBrowserOriginal} from '@ionic-native/in-app-browser'å`Ω;
 
 export function jwtOptionsFactory(storage) {
     return {

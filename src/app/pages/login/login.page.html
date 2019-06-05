@@ -3,27 +3,25 @@
         <ion-grid>
             <ion-row color="primary" justify-content-center>
                 <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-                    <div text-center>
-                        <h3>Login</h3>
-                    </div>
+
                     <div>
                         <ion-item>
-                            <ion-input type="text" name="username" #username="ngModel" [(ngModel)]="login.username" placeholder="Username" required></ion-input>
+                            <ion-input type="text" name="username" #username="ngModel" [(ngModel)]="login.username" placeholder="Username" style="margin-top: 40px;" required></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input style="margin-top: 40px" #password="ngModel" type="password" name="password" [(ngModel)]="login.password" placeholder="Password" required>
+                            <ion-input style="margin-top: 60px;" #password="ngModel" type="password" name="password" [(ngModel)]="login.password" placeholder="Password" required>
                             </ion-input>
                             <ion-input type="submit"></ion-input>
                         </ion-item>
                     </div>
                     <div>
-                        <ion-button size="medium" type="submit" expand="block">
+                        <ion-button size="medium" type="submit" expand="block" style="margin-top: 50px;">
                             Login
                         </ion-button>
                     </div>
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row padding>
                 <div text-center>
                     Don't have an account? <a routerLink='/register'>Sign-up
                 </a>

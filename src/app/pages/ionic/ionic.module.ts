@@ -5,16 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
-
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import {  Angular4PaystackModule } from 'angular4-paystack';
+import { IonicPage } from './ionic.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: IonicPage
   }
 ];
 
@@ -23,10 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    Angular4PaystackModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [HomePage]
+  declarations: [IonicPage]
 })
-export class HomePageModule {}
-
+export class IonicPageModule {}
