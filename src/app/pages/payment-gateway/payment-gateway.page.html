@@ -10,7 +10,7 @@
 
 
 <ion-content ion-padding>
-    <form #reg (ngSubmit)="doregisterCard(reg)">
+    <form #reg (ngSubmit)="validateCard(reg)">
         <ion-grid>
             <ion-row>
                 <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -18,49 +18,20 @@
                     <p *ngIf="successMessage">{{successMessage}}</p>
                     <div ion-padding>
                         <ion-item>
-                            <ion-label>Biller name:</ion-label>
-                            <ion-input type="text" class="form-control">{{biller_name}}</ion-input>
-                        </ion-item>
-                        <ion-item>
                             <ion-label>Package name:</ion-label>
-                            <ion-input type="text" class="form-control">{{name}}</ion-input>
+                            <ion-input type="text" class="form-control">{{package_name}}</ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label>Amount: </ion-label>
-                            <ion-input type="text">{{id}}</ion-input>
+                            <ion-input type="text">{{amount}}</ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label for="inputCity">Card number:</ion-label>
                             <ion-input type="text" [(ngModel)]="register.card_number" name="card_number" #card_number="ngModel" required></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label for="inputType">Card type:</ion-label>
-                            <ion-input type="text" [(ngModel)]="register.type" name="type" #type="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Address:</ion-label>
-                            <ion-input type="text" [(ngModel)]="register.street" name="street" #street="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>City:</ion-label>
-                            <ion-input type="text" [(ngModel)]="register.city" name="city" #city="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>State:</ion-label>
-                            <ion-input type="text" [(ngModel)]="register.state" name="state" #state="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Postal:</ion-label>
-                            <ion-input type="number" [(ngModel)]="register.postal" name="postal" #postal="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Country:</ion-label>
-                            <ion-input type="text" [(ngModel)]="register.country" name="country" #country="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
                             <ion-label>cvv:</ion-label>
                             <ion-input type="number" [(ngModel)]="register.cvv" name="cvv" #cvv="ngModel" required>
-
                             </ion-input>
                         </ion-item>
                         <ion-item>
@@ -72,13 +43,11 @@
                             <ion-input type="password" [(ngModel)]="register.pin" name="pin" #pin="ngModel" required></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Confirm pin:</ion-label>
-                            <ion-input type="password" name="pin" [(ngModel)]="register.confirm_pin" #confirm_pin="ngModel" required></ion-input>
+                            <ion-input [(ngModel)]="transaction.transaction_reference" #transaction_reference="ngModel" *ngIf="!isHidden" style="color: white;">makeid(5)</ion-input>
                         </ion-item>
-
                     </div>
                     <div padding>
-                        <ion-button size="large" type="submit" expand="block">SUBMIT</ion-button>
+                        <ion-button size="large" type="submit" expand="block" (click)="presentAlert()">SUBMIT</ion-button>
                     </div>
                 </ion-col>
             </ion-row>

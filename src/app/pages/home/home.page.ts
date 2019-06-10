@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
 
 
     onClickBiller(id) {
-        console.log('bill_id:', id);
+        console.log('biller_id:', id);
         this.router.navigate(['/valid-info/', id]);
     }
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app-service.service';
+import {RegTran} from 'src/app/model/makeTransaction';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transactions',
@@ -7,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionsPage implements OnInit {
 
-  constructor() { }
+  transaction: RegTran = new RegTran();
+
+    // tslint:disable-next-line:max-line-length
+  constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
+
+  // displayTransactionHistory() {
+  //   this.appService.get()
+  // }
 
 }
 

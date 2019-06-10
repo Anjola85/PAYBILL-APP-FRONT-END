@@ -12,12 +12,12 @@
     <ion-grid>
 
         <ion-row>
-            <ion-col *ngFor="let package of biller?.packages">
-                <ion-card style="background-color: green; height: 160px;" (click)="onClickPackage( package.amount, package._id, biller.biller_name, package.name)">
+            <ion-col *ngFor="let package of packages">
+                <ion-card style="background-color: green; height: 160px;" (click)="onClickPackage(package.package_name, package.amount)">
                     <img src="{{package.image}}">
                     <ion-card-header>
                         <ion-card-title style="color: white; margin-left: 200px;">
-                            <h4>{{package.name}}</h4>
+                            <h4>{{package.package_name}}</h4>
                         </ion-card-title>
                     </ion-card-header>
                 </ion-card>

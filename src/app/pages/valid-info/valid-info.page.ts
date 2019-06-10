@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-valid-info',
@@ -14,7 +14,8 @@ export class ValidInfoPage implements OnInit {
   successMessage;
   errorMessage;
 
-  constructor(private appService: AppService, private navCtrl: NavController, private router: Router) { }
+    // tslint:disable-next-line:max-line-length
+  constructor(private appService: AppService, private navCtrl: NavController, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit(): void {
     // this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
@@ -28,7 +29,7 @@ export class ValidInfoPage implements OnInit {
     // });
   }
 
-  validateUser () {
+  validateUser (id) {
       this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
@@ -36,7 +37,7 @@ export class ValidInfoPage implements OnInit {
         this.successMessage = res.message;
         console.log(this.successMessage);
         console.log(this.information);
-        this.navCtrl.navigateForward('packages/:id');
+        this.presentPrompt(id);
       }
       if (res.code === 404) {
         this.errorMessage = res.message;
@@ -48,4 +49,45 @@ export class ValidInfoPage implements OnInit {
       }
       });
     }
+
+
+  async presentPrompt(id) {
+    const alert = await this.alertCtrl.create({
+      header: 'User Information',
+      inputs: [
+        {
+          name: 'firstname',
+          placeholder: this.information.user.firstname
+        },
+        {
+          name: 'lastname',
+          placeholder: this.information.user.lastname
+        },
+        {
+          name: 'usersPhoneNumber',
+          placeholder: this.information.user.phoneNumber
+        },
+        {
+          name: 'emailAddress',
+          placeholder: this.information.user.email
+        },
+        {
+          name: 'SmartcardNumber',
+          placeholder: this.information.transaction_id
+        }
+      ],
+      buttons: [
+        {
+          text: 'Dismiss',
+          role: 'cancel',
+          handler: data => {
+            console.log('Dismissed information');
+          }
+        }
+      ]
+    });
+    await alert.present();
+    this.navCtrl.navigateForward('packages/', id);
+  }
+
 }

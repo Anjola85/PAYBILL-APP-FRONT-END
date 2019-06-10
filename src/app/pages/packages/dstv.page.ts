@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class DstvPage implements OnInit {
 
-  biller: any;
-  id: any;
+  packages: any;
+  // id: any;
+  // biller: any;
 
 
   constructor(private appService: AppService,
@@ -19,25 +20,25 @@ export class DstvPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      console.log('params:', params['id']);
-      this.id = params['id'];
-    });
-    this.appService.get('/api/billers/' + this.id).subscribe(res => {
+    // this.route.params.subscribe((params) => {
+    //   console.log('params:', params['id']);
+    //   this.id = params['id'];
+    // });
+    this.appService.get('/api/packages?biller_id=5cecf392fc675754d777a903').subscribe(res => {
       console.log('res:', res);
-      if (res) {
-        this.biller = res['data'];
+      if (res.status === true) {
+        this.packages = res['data'];
+        console.log(this.packages);
       }
     }, err => {
       console.log('err:', err);
     });
   }
 
-  onClickPackage(amount, id, biller_name, name) {
+  onClickPackage(amount, package_name) {
     console.log('package amount:', amount);
-    console.log('package id:', id);
-    console.log('package name:', name);
-    this.router.navigate(['payment-gateway/', amount, id, biller_name, name]);
+    console.log('package name:', package_name);
+    this.router.navigate(['payment-gateway/', amount, package_name]);
   }
 
 
