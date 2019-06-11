@@ -14,22 +14,23 @@ export class ValidInfoPage implements OnInit {
   successMessage;
   errorMessage;
 
+  // passing IDs
+  user_id: any;
+  biller_id: any;
+
     // tslint:disable-next-line:max-line-length
-  constructor(private appService: AppService, private navCtrl: NavController, private router: Router, private alertCtrl: AlertController) { }
+  constructor(private appService: AppService, private navCtrl: NavController, private router: Router, private alertCtrl: AlertController, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
-    //   console.log('res:', res);
-    //   if (res) {
-    //     this.information = res['data'];
-    //     console.log(this.information);
-    //   }
-    // }, err => {
-    //   console.log('err:', err);
-    // });
+    this.route.params.subscribe((params) => {
+      console.log('user_id:', params['user_id']);
+      this.user_id = params['user_id'];
+      console.log('biller_id:', params['biller_id']);
+      this.biller_id = params['biller_id'];
+    });
   }
 
-  validateUser (id) {
+  validateUser (user_id, biller_id) {
       this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
@@ -37,7 +38,8 @@ export class ValidInfoPage implements OnInit {
         this.successMessage = res.message;
         console.log(this.successMessage);
         console.log(this.information);
-        this.presentPrompt(id);
+        this.presentPrompt();
+        this.passingIDs(user_id, biller_id);
       }
       if (res.code === 404) {
         this.errorMessage = res.message;
@@ -51,7 +53,7 @@ export class ValidInfoPage implements OnInit {
     }
 
 
-  async presentPrompt(id) {
+  async presentPrompt() {
     const alert = await this.alertCtrl.create({
       header: 'User Information',
       inputs: [
@@ -87,7 +89,10 @@ export class ValidInfoPage implements OnInit {
       ]
     });
     await alert.present();
-    this.navCtrl.navigateForward('packages/', id);
+  }
+
+  passingIDs (user_id, biller_id) {
+    this.router.navigate(['packages/', user_id, biller_id]);
   }
 
 }

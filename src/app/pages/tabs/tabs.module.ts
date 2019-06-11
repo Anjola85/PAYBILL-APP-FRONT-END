@@ -12,8 +12,8 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      { path: 'home', loadChildren: '../home/home.module#HomePageModule'},
-      { path: 'transactions', loadChildren: '../transactions/transactions.module#TransactionsPageModule'},
+      { path: 'home/:user_id', loadChildren: '../home/home.module#HomePageModule'},
+      { path: 'transactions/:user_id/:biller_id/:id', loadChildren: '../transactions/transactions.module#TransactionsPageModule'},
       { path: 'user-profile', loadChildren: '../user-profile/user-profile.module#UserProfilePageModule'},
     ]
   },

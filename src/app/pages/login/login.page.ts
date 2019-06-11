@@ -16,6 +16,7 @@ import {NavController} from '@ionic/angular';
 export class LoginPage implements OnInit {
   login: LoginM = new LoginM();
   sucessMessage;
+  userInformation: any;
 
 
   // tslint:disable-next-line:max-line-length
@@ -27,18 +28,16 @@ export class LoginPage implements OnInit {
 
 
 
-  doLogin(loginForm: NgForm) {
-  //   //   if (!this.doValidation){
-  //   //     return
-  //   //   }
+  doLogin(loginForm: NgForm, user_id) {
     this.appService.post('/api/login', this.login)
         .subscribe(res => {
           console.log('response' , res);
           if (res.status === true) {
             this.sucessMessage = res.message;
+            this.userInformation = res['data'];
             AppHelper.store('token', res.token);
             AppHelper.store('userInfo', res.data);
-            this.navCtrl.navigateForward('tabs/home');
+            this.userId(user_id);
           }
 
         }, error => {
@@ -46,7 +45,9 @@ export class LoginPage implements OnInit {
         });
   }
 
-  onSubmit() {
+  userId(user_id) {
+    user_id = this.userInformation._id;
+    this.navCtrl.navigateForward(['tabs/home/', user_id]);
   }
 
 

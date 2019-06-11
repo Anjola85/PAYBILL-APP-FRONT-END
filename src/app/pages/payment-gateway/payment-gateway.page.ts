@@ -27,15 +27,22 @@ export class PaymentGatewayPage implements OnInit {
   successMessage;
   errorMessage;
 
+  // passing IDs
+  user_id: any;
+  biller_id: any;
+  id: any;
+
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private navCtrl: NavController, private alertCtrl: AlertController) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      console.log('params:', params['amount']);
-      console.log('params:', params['package_name']);
-      this.package_name = params['package_name'];
-      this.amount = params['amount'];
+      console.log('user_id:', params['user_id']);
+      console.log('biller_id:', params['biller_id']);
+      console.log('id:', params['id']);
+      this.user_id = params['user_id'];
+      this.biller_id = params['biller_id'];
+      this.id = params['id'];
     });
   }
 
@@ -66,6 +73,7 @@ export class PaymentGatewayPage implements OnInit {
         this.presentAlert();
         console.log('this is a card register response', res);
         this.card = res['data'];
+        console.log(this.card._id);
         this.navCtrl.navigateForward('tabs/transactions');
       }
       if (res.code === 404) {

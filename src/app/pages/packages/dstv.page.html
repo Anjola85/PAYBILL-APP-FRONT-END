@@ -13,7 +13,7 @@
 
         <ion-row>
             <ion-col *ngFor="let package of packages">
-                <ion-card style="background-color: green; height: 160px;" (click)="onClickPackage(package.package_name, package.amount)">
+                <ion-card style="background-color: green; height: 160px;" (click)="onClickPackage(user_id, biller_id, package._id)">
                     <img src="{{package.image}}">
                     <ion-card-header>
                         <ion-card-title style="color: white; margin-left: 200px;">

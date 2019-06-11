@@ -11,19 +11,22 @@ import { Router } from '@angular/router';
 export class DstvPage implements OnInit {
 
   packages: any;
-  // id: any;
-  // biller: any;
 
+  package_id: any;
+  // passing ids
+  user_id: any;
+  biller_id: any;
 
   constructor(private appService: AppService,
     private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   console.log('params:', params['id']);
-    //   this.id = params['id'];
-    // });
+    this.route.params.subscribe((params) => {
+      this.user_id = params['user_id'];
+      this.biller_id = params['biller_id'];
+    });
+
     this.appService.get('/api/packages?biller_id=5cecf392fc675754d777a903').subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
@@ -35,10 +38,12 @@ export class DstvPage implements OnInit {
     });
   }
 
-  onClickPackage(amount, package_name) {
-    console.log('package amount:', amount);
-    console.log('package name:', package_name);
-    this.router.navigate(['payment-gateway/', amount, package_name]);
+
+  onClickPackage(user_id, biller_id, id) {
+    console.log('user_id:', user_id);
+    console.log('biller_id:', biller_id);
+    console.log('package id:', id);
+    this.router.navigate(['payment-gateway/', user_id, biller_id, id]);
   }
 
 

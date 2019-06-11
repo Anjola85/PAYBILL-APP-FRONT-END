@@ -2,7 +2,7 @@ import {AuthService} from '../../services/auth.service';
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {ToastController} from '@ionic/angular';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { AppService } from 'src/app/services/app-service.service';
 // import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
@@ -15,12 +15,19 @@ export class HomePage implements OnInit {
     data = '';
     billers: any;
 
+    // passing IDs
+    user_id: any;
 
     // @ts-ignore
-    constructor(private storage: Storage, private router: Router, private appService: AppService) {
+    constructor(private storage: Storage, private router: Router, private appService: AppService, private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            console.log('user_id:', params['user_id']);
+            this.user_id = params['user_id'];
+        });
+
         this.appService.get('/api/billers?types=tv-bills').subscribe(res => {
             console.log('res:', res);
             if (res) {
@@ -31,15 +38,16 @@ export class HomePage implements OnInit {
           });
     }
 
+
     go() {
         this.router.navigateByUrl('https://www.vtpass.com/');
         window.open('https://www.vtpass.com/', '_self');
     }
 
 
-    onClickBiller(id) {
-        console.log('biller_id:', id);
-        this.router.navigate(['/valid-info/', id]);
+    onClickBiller(biller_id, user_id) {
+        user_id = this.user_id;
+        this.router.navigate(['/valid-info/', user_id, biller_id]);
     }
 
     doo() {
