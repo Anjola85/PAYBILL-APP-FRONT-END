@@ -39,11 +39,11 @@ export class DstvPage implements OnInit {
   }
 
 
-  onClickPackage(user_id, biller_id, id) {
+  onClickPackage(package_name, package_amount, user_id, biller_id, id) {
     console.log('user_id:', user_id);
     console.log('biller_id:', biller_id);
     console.log('package id:', id);
-    this.router.navigate(['payment-gateway/', user_id, biller_id, id]);
+    this.router.navigate(['payment-gateway/', package_name, package_amount, user_id, biller_id, id]);
   }
 
 

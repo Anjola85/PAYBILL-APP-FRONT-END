@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>PAYMENT PORTAL</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="packages/:id"></ion-back-button>
+            <ion-back-button defaultHref="packages/:user_id/:biller_id"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -23,7 +23,7 @@
                         </ion-item>
                         <ion-item>
                             <ion-label>Amount: </ion-label>
-                            <ion-input type="text">{{amount}}</ion-input>
+                            <ion-input type="text">{{package_amount}}</ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label for="inputCity">Card number:</ion-label>

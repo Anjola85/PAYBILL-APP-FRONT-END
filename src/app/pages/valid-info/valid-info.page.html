@@ -1,3 +1,11 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/home/:user_id"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content color="secondary">
     <form>
         <p *ngIf="errorMessage">{{errorMessage}}</p>

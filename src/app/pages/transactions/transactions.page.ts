@@ -13,19 +13,22 @@ export class TransactionsPage implements OnInit {
   transaction: RegTran = new RegTran();
 
   // passing IDs
-  // user_id: any;
-  // biller_id: any;
-  // id: any;
+  user_id: any;
+  id: any;
+  card_id: any;
 
     // tslint:disable-next-line:max-line-length
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   this.user_id = params['user_id'];
-    //   this.biller_id = params['biller_id'];
-    //   this.id = params['id'];
-    // });
+    this.route.params.subscribe((params) => {
+      this.user_id = params['user_id'];
+      this.id = params['id'];
+      this.card_id = params['card_id'];
+      console.log('user_id', params['user_id']);
+      console.log('id', params['id']);
+      console.log('card_id', params['card_id']);
+    });
   }
 
 

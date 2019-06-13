@@ -15,7 +15,7 @@ import { AppHelper } from '../helper/app-helper';
 export class PaymentGatewayPage implements OnInit {
   isHidden = true;
 
-  amount: any;
+  package_amount: any;
   package_name: any;
 
   card: any;
@@ -26,7 +26,9 @@ export class PaymentGatewayPage implements OnInit {
   loading = false;
   successMessage;
   errorMessage;
+  transactionObj: any = {};
 
+  card_id: any;
   // passing IDs
   user_id: any;
   biller_id: any;
@@ -37,6 +39,11 @@ export class PaymentGatewayPage implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
+      console.log('package_amount:', params['package_amount']);
+      console.log('package_amount', params['package_amount']);
+      this.package_amount = params['package_amount'];
+      this.package_name = params['package_name'];
+      // added params
       console.log('user_id:', params['user_id']);
       console.log('biller_id:', params['biller_id']);
       console.log('id:', params['id']);
@@ -70,11 +77,11 @@ export class PaymentGatewayPage implements OnInit {
       this.loading = false;
       if (res.status === true) {
         this.successMessage = res.message;
-        this.presentAlert();
-        console.log('this is a card register response', res);
         this.card = res['data'];
+        this.card_id = this.card._id;
+        this.makeTransaction();
+        console.log('this is a card register response', res);
         console.log(this.card._id);
-        this.navCtrl.navigateForward('tabs/transactions');
       }
       if (res.code === 404) {
         this.errorMessage = res.message;
@@ -85,10 +92,19 @@ export class PaymentGatewayPage implements OnInit {
   }
 
   makeTransaction() {
-    this.appService.post('/api/createTransaction', this.transaction).subscribe(res => {
+    this.transactionObj = {
+      card: this.card_id,
+      package: this.id,
+      user_id: this.user_id,
+      transaction_reference: this.makeid(5)
+    };
+    console.log('transaction obj:', this.transactionObj);
+    this.appService.post('/api/createTransaction', this.transactionObj).subscribe(res => {
       console.log('response:', res);
       if (res.status === true) {
         this.successMessage = res.message;
+        this.presentAlert();
+        this.navCtrl.navigateForward(['tabs/transactions/', this.user_id, this.id, this.card_id]);
       }
       if (res.code === 404) {
         this.errorMessage = res.message;
@@ -126,7 +142,10 @@ export class PaymentGatewayPage implements OnInit {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
- }
+  }
+
+  // passIDs(user_id, biller_id, id) {
+  // }
 
   // creditDetails(card_number, amount, name, type, biller_name) {
   //   console.log('card number:', card_number);
