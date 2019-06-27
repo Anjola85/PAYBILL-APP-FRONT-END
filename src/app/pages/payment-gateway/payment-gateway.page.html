@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-
+<h1>{{user_id.lastname}}</h1>
 
 <ion-content ion-padding>
     <form #reg (ngSubmit)="validateCard(reg)">
@@ -41,9 +41,6 @@
                         <ion-item>
                             <ion-label>Pin:</ion-label>
                             <ion-input type="password" [(ngModel)]="register.pin" name="pin" #pin="ngModel" required></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-input [(ngModel)]="transaction.transaction_reference" #transaction_reference="ngModel" *ngIf="!isHidden" style="color: white;">makeid(5)</ion-input>
                         </ion-item>
                     </div>
                     <div padding>

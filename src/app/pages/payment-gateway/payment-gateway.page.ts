@@ -13,10 +13,6 @@ import { AppHelper } from '../helper/app-helper';
   styleUrls: ['./payment-gateway.page.scss'],
 })
 export class PaymentGatewayPage implements OnInit {
-  isHidden = true;
-
-  package_amount: any;
-  package_name: any;
 
   card: any;
 
@@ -29,27 +25,29 @@ export class PaymentGatewayPage implements OnInit {
   transactionObj: any = {};
 
   card_id: any;
-  // passing IDs
+  // passing params
   user_id: any;
   biller_id: any;
-  id: any;
+  package_id: any;
+  package_name: any;
+  package_amount: any;
+  // end
 
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, private router: Router, private appService: AppService, private navCtrl: NavController, private alertCtrl: AlertController) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      console.log('package_amount:', params['package_amount']);
-      console.log('package_amount', params['package_amount']);
-      this.package_amount = params['package_amount'];
-      this.package_name = params['package_name'];
-      // added params
       console.log('user_id:', params['user_id']);
-      console.log('biller_id:', params['biller_id']);
-      console.log('id:', params['id']);
       this.user_id = params['user_id'];
+      console.log('biller_id:', params['biller_id']);
       this.biller_id = params['biller_id'];
-      this.id = params['id'];
+      console.log('package_id:', params['package_id']);
+      this.package_id = params['package_id'];
+      console.log('package_name:', params['package_name']);
+      this.package_name = params['package_name'];
+      console.log('package_amount:', params['package_amount']);
+      this.package_amount = params['package_amount'];
     });
   }
 
@@ -94,7 +92,7 @@ export class PaymentGatewayPage implements OnInit {
   makeTransaction() {
     this.transactionObj = {
       card: this.card_id,
-      package: this.id,
+      package: this.package_id,
       user_id: this.user_id,
       transaction_reference: this.makeid(5)
     };
@@ -104,7 +102,7 @@ export class PaymentGatewayPage implements OnInit {
       if (res.status === true) {
         this.successMessage = res.message;
         this.presentAlert();
-        this.navCtrl.navigateForward(['tabs/transactions/', this.user_id, this.id, this.card_id]);
+        this.navCtrl.navigateForward(['tabs/transactions/', this.user_id, this.package_id, this.card_id]);
       }
       if (res.code === 404) {
         this.errorMessage = res.message;

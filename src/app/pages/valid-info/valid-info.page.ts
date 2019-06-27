@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-valid-info',
@@ -9,17 +9,24 @@ import { NavController, AlertController } from '@ionic/angular';
   styleUrls: ['./valid-info.page.scss'],
 })
 export class ValidInfoPage implements OnInit {
+  isHidden: boolean;
   inputValue: String = '';
   information: any;
   successMessage;
   errorMessage;
+  message;
 
   // passing IDs
   user_id: any;
   biller_id: any;
+  package_name: any;
+  package_amount: any;
+  package_id: any;
+  package_image: any;
+
 
     // tslint:disable-next-line:max-line-length
-  constructor(private appService: AppService, private navCtrl: NavController, private router: Router, private alertCtrl: AlertController, private route: ActivatedRoute) { }
+  constructor(private appService: AppService, private navCtrl: NavController, private router: Router, private alertCtrl: AlertController, private route: ActivatedRoute, public toastController: ToastController) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -27,72 +34,61 @@ export class ValidInfoPage implements OnInit {
       this.user_id = params['user_id'];
       console.log('biller_id:', params['biller_id']);
       this.biller_id = params['biller_id'];
+      console.log('package_name:', params['package_name']);
+      this.package_name = params['package_name'];
+      console.log('package_amount:', params['package_amount']);
+      this.package_amount = params['package_amount'];
+      console.log('package_id:', params['package_id']);
+      this.package_id = params['package_id'];
+      console.log('package_image:', params['package_image']);
+      this.package_image = params['package_image'];
     });
+
+
   }
 
-  validateUser (user_id, biller_id) {
+
+  validateUser () {
+      this.validateInput(this.user_id, this.biller_id, this.package_id, this.package_name, this.package_amount);
       this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
         this.information = res['data'];
-        this.successMessage = res.message;
-        console.log(this.successMessage);
-        console.log(this.information);
-        this.presentPrompt();
-        this.passingIDs(user_id, biller_id);
+        console.log('firstname:', this.information.user.firstname);
+        console.log('lastname:', this.information.user.lastname);
+        // console.log('user information:', this.information);
+        // console.log(this.successMessage);
       }
       if (res.code === 404) {
-        this.errorMessage = res.message;
         console.log(this.errorMessage);
       }
       if (res.code === 400) {
-        this.errorMessage = res.message;
         console.log(this.errorMessage);
       }
       });
     }
 
-
-  async presentPrompt() {
-    const alert = await this.alertCtrl.create({
-      header: 'User Information',
-      inputs: [
-        {
-          name: 'firstname',
-          placeholder: this.information.user.firstname
-        },
-        {
-          name: 'lastname',
-          placeholder: this.information.user.lastname
-        },
-        {
-          name: 'usersPhoneNumber',
-          placeholder: this.information.user.phoneNumber
-        },
-        {
-          name: 'emailAddress',
-          placeholder: this.information.user.email
-        },
-        {
-          name: 'SmartcardNumber',
-          placeholder: this.information.transaction_id
-        }
-      ],
-      buttons: [
-        {
-          text: 'Dismiss',
-          role: 'cancel',
-          handler: data => {
-            console.log('Dismissed information');
-          }
-        }
-      ]
-    });
-    await alert.present();
+  validateInput(user_id, biller_id, package_id, package_name, package_amount): boolean {
+    if (this.inputValue === undefined || this.inputValue === '') {
+      this.message = 'Field cannot be left empty!';
+      return false;
+    } else {
+      this.message = 'Validation successful!';
+      setTimeout(() => {
+        this.router.navigate(['payment-gateway/', user_id, biller_id, package_id, package_name, package_amount]);
+    }, 2000);
+      this.isHidden = true;
+      return true;
+    }
   }
 
-  passingIDs (user_id, biller_id) {
-    this.router.navigate(['packages/', user_id, biller_id]);
-  }
+  // async presentToast() {
+  //   const toast = await this.toastController.create({
+  //     message: this.message,
+  //     duration: 2000
+  //   });
+  //   toast.present();
+  // }
+
 
 }

@@ -1,33 +1,60 @@
 <ion-header>
-    <ion-toolbar color="secondary">
+    <ion-toolbar>
+        <ion-title>{{package_name}}</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="tabs/home/:user_id"></ion-back-button>
+            <ion-back-button defaultHref="packages/:user_id/:biller_id"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content color="secondary">
-    <form>
-        <p *ngIf="errorMessage">{{errorMessage}}</p>
-        <ion-grid>
-            <ion-row color="primary" justify-content-center>
-                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-                    <div text-center>
-                        <h3>Fill in the Form</h3>
-                    </div>
-                    <div padding>
-                        <ion-item style="margin-top: 50px;">
-                            <ion-input type="text" [(ngModel)]="inputValue" name="inputValue" placeholder="Enter Smart-Card number" required></ion-input>
-                        </ion-item>
-                    </div>
+<ion-content>
 
-                    <div style="margin-top: 20px; margin-left: 275px;">
-                        <ion-button size="medium" type="submit" (click)="validateUser(user_id, biller_id)">PROCEED</ion-button>
-                    </div>
+    <ion-grid>
 
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </form>
+        <ion-row>
+            <ion-col>
+                <ion-card style="background-color: green; height: 190px;">
+                    ">
+                    <div class="myImage">
+                        <img src="{{package_image}}">
+                        <span>₦{{package_amount}}</span>
+                    </div>
+                    <ion-card-header>
+                        <ion-card-title style="color: white; margin-left: 200px;">
+                            <h4></h4>
+                        </ion-card-title>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <p *ngIf="message">{{message}}</p>
+                <div ion-padding>
+                    <ion-item>
+                        <ion-label>Smarct-Card Number:</ion-label>
+                        <ion-input type="text" [(ngModel)]="inputValue" name="inputValue" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Amount: </ion-label>
+                        <ion-input type="text">{{package_amount}}</ion-input>
+                    </ion-item>
+                </div>
+
+                <div ion-padding *ngIf="isHidden">
+                    <ion-item>
+                        <ion-label>Fullname:</ion-label>
+                        <ion-input type="text">{{information.user.firstname}} {{information.user.lastname}}</ion-input>
+                    </ion-item>
+                </div>
+                <div style="margin-top: 20px; margin-left: 275px;">
+                    <ion-button size="medium" type="submit" (click)="validateUser(user_id, biller_id, package_id, package_name, package_amount)">CONFIRM</ion-button>
+                </div>
+            </ion-col>
+        </ion-row>
+
+
+    </ion-grid>
 
 </ion-content>

@@ -36,6 +36,10 @@ export class HomePage implements OnInit {
           }, err => {
             console.log('err:', err);
           });
+
+        // this.appService.get('/api/packages?biller_id=' + this.biller_id).subscribe(res => {
+
+        // })
     }
 
 
@@ -47,7 +51,8 @@ export class HomePage implements OnInit {
 
     onClickBiller(biller_id, user_id) {
         user_id = this.user_id;
-        this.router.navigate(['/valid-info/', user_id, biller_id]);
+        console.log('biller_id:', biller_id);
+        this.router.navigate(['/packages/', user_id, biller_id]);
     }
 
     doo() {
