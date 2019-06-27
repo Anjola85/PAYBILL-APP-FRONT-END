@@ -31,6 +31,8 @@ export class PaymentGatewayPage implements OnInit {
   package_id: any;
   package_name: any;
   package_amount: any;
+  firstName;
+  lastName;
   // end
 
   // tslint:disable-next-line:max-line-length
@@ -48,6 +50,10 @@ export class PaymentGatewayPage implements OnInit {
       this.package_name = params['package_name'];
       console.log('package_amount:', params['package_amount']);
       this.package_amount = params['package_amount'];
+      console.log('firstName:', params['firstName']);
+      this.firstName = params['firstName'];
+      console.log('lastName:', params['lastName']);
+      this.lastName = params['lastName'];
     });
   }
 

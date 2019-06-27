@@ -23,6 +23,8 @@ export class ValidInfoPage implements OnInit {
   package_amount: any;
   package_id: any;
   package_image: any;
+  firstName;
+  lastName;
 
 
     // tslint:disable-next-line:max-line-length
@@ -49,13 +51,16 @@ export class ValidInfoPage implements OnInit {
 
 
   validateUser () {
-      this.validateInput(this.user_id, this.biller_id, this.package_id, this.package_name, this.package_amount);
+      // tslint:disable-next-line:max-line-length
+      this.validateInput(this.user_id, this.biller_id, this.package_id, this.package_name, this.package_amount, this.firstName, this.lastName);
       this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
         this.information = res['data'];
-        console.log('firstname:', this.information.user.firstname);
-        console.log('lastname:', this.information.user.lastname);
+        // console.log('firstname:', this.information.user.firstname);
+        this.firstName = this.information.user.firstname;
+        // console.log('lastname:', this.information.user.lastname);
+        this.lastName = this.information.user.lastname;
         // console.log('user information:', this.information);
         // console.log(this.successMessage);
       }
@@ -68,14 +73,14 @@ export class ValidInfoPage implements OnInit {
       });
     }
 
-  validateInput(user_id, biller_id, package_id, package_name, package_amount): boolean {
+  validateInput(user_id, biller_id, package_id, package_name, package_amount, firstName, lastName): boolean {
     if (this.inputValue === undefined || this.inputValue === '') {
       this.message = 'Field cannot be left empty!';
       return false;
     } else {
       this.message = 'Validation successful!';
       setTimeout(() => {
-        this.router.navigate(['payment-gateway/', user_id, biller_id, package_id, package_name, package_amount]);
+        this.router.navigate(['payment-gateway/', user_id, biller_id, package_id, package_name, package_amount, firstName, lastName]);
     }, 2000);
       this.isHidden = true;
       return true;
