@@ -26,7 +26,7 @@
 
 
 
-        <table style="width:100%">
+        <table style="width:100%" *ngFor="let transaction of transaction_data">
 
             <tr>
                 <th style="color: white;"> ss</th>
@@ -36,25 +36,26 @@
 
             <tr>
                 <td>
-                    <h5>Date and time</h5>
-                </td>
-                <td>
-                    package amount
+                    <h5>{{transaction.createdAt}}</h5>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <p>card number</p>
+                    <p>{{transaction.card.card_number}}</p>
                 </td>
-                <td>Biller name</td>
+                <td>{{transaction.package.package_name}}</td>
             </tr>
 
             <tr>
                 <td>
-                    <p>Card type</p>
+                    <p>RefNo: {{transaction.transaction_reference}}</p>
+                </td>
+                <td>
+                    <p>₦{{transaction.package.amount}}</p>
                 </td>
             </tr>
+
 
         </table>
 

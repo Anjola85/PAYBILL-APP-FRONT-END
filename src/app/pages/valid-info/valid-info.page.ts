@@ -78,12 +78,12 @@ export class ValidInfoPage implements OnInit {
       this.message = 'Field cannot be left empty!';
       return false;
     } else {
+      this.isHidden = true;
       this.message = 'Validation successful!';
       setTimeout(() => {
         this.router.navigate(['payment-gateway/', user_id, biller_id, package_id, package_name, package_amount, firstName, lastName]);
     }, 2000);
-      this.isHidden = true;
-      return true;
+    return true;
     }
   }
 
