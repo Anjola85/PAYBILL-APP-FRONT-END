@@ -11,7 +11,7 @@ import { NavController, AlertController, ToastController } from '@ionic/angular'
 export class ValidInfoPage implements OnInit {
   isHidden: boolean;
   inputValue: String = '';
-  information: any;
+  user_information: any;
   successMessage;
   errorMessage;
   message;
@@ -52,16 +52,17 @@ export class ValidInfoPage implements OnInit {
 
   validateUser () {
       // tslint:disable-next-line:max-line-length
-      this.validateInput(this.user_id, this.biller_id, this.package_id, this.package_name, this.package_amount, this.firstName, this.lastName);
+      this.validateInput();
       this.appService.get('/api/userInfo?transaction_id=' + this.inputValue).subscribe(res => {
       console.log('res:', res);
       if (res.status === true) {
-        this.information = res['data'];
+        this.user_information = res['data'];
+        console.log('user information:', this.user_information);
         // console.log('firstname:', this.information.user.firstname);
-        this.firstName = this.information.user.firstname;
+        this.firstName = this.user_information.user.firstname;
         // console.log('lastname:', this.information.user.lastname);
-        this.lastName = this.information.user.lastname;
-        // console.log('user information:', this.information);
+        this.lastName = this.user_information.user.lastname;
+        // console.log('user information:', this.user_information);
         // console.log(this.successMessage);
       }
       if (res.code === 404) {
@@ -73,7 +74,7 @@ export class ValidInfoPage implements OnInit {
       });
     }
 
-  validateInput(user_id, biller_id, package_id, package_name, package_amount, firstName, lastName): boolean {
+  validateInput(): boolean {
     if (this.inputValue === undefined || this.inputValue === '') {
       this.message = 'Field cannot be left empty!';
       return false;
@@ -81,7 +82,8 @@ export class ValidInfoPage implements OnInit {
       this.isHidden = true;
       this.message = 'Validation successful!';
       setTimeout(() => {
-        this.router.navigate(['payment-gateway/', user_id, biller_id, package_id, package_name, package_amount, firstName, lastName]);
+        // tslint:disable-next-line:max-line-length
+        this.router.navigate(['payment-gateway/', this.user_id, this.biller_id, this.package_id, this.package_name, this.package_amount, this.firstName, this.lastName]);
     }, 2000);
     return true;
     }

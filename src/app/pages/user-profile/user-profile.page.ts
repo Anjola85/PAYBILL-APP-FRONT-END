@@ -17,11 +17,10 @@ export class UserProfilePage implements OnInit {
 
   ngOnInit() {
     this.userInfo = AppHelper.retrieve('userInfo');
-    this.firstname = this.userInfo.firstName;
-    this.lastname = this.userInfo.lastName;
+    this.firstname = this.userInfo.firstname;
+    this.lastname = this.userInfo.lastname;
     this.firstnameInitial = this.firstname.charAt(0);
     this.lastnameInitial = this.lastname.charAt(0);
-    console.log('firstnameInitial:', this.firstnameInitial);
   }
 
 }

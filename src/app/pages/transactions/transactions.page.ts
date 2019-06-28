@@ -3,6 +3,7 @@ import { AppService } from 'src/app/services/app-service.service';
 import {RegTran} from 'src/app/model/makeTransaction';
 import { ActivatedRoute } from '@angular/router';
 import { HomePage } from '../home/home.page';
+import { AppHelper } from '../helper/app-helper';
 
 @Component({
   selector: 'app-transactions',
@@ -16,17 +17,20 @@ export class TransactionsPage implements OnInit {
   transaction_data;
   message;
   result;
-  // passing IDs
+  userInfo;
   user_id: any;
 
     // tslint:disable-next-line:max-line-length
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.user_id = params['user_id'];
-      console.log('user_id', params['user_id']);
-    });
+    // this.route.params.subscribe((params) => {
+    //   this.user_id = params['user_id'];
+    //   console.log('user_id', params['user_id']);
+    // });
+    this.userInfo = AppHelper.retrieve('userInfo');
+    this.user_id = this.userInfo._id;
+    console.log('user_id:', this.user_id);
 
     this.appService.get('/api/transactions?user_id=' + this.user_id).subscribe(res => {
       console.log('response:', res);
@@ -39,7 +43,7 @@ export class TransactionsPage implements OnInit {
         for (let i = 0; i < this.transaction_data.length; i++) {
           console.log(`For transaction ${i}`, this.transaction_data[i]);
           console.log(`Total number of transactions made: ${i}`);
-       }
+        }
       }
       if (res.code === 404) {
         console.log('errMessage:', res.message);
