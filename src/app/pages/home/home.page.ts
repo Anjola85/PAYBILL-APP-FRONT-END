@@ -1,9 +1,10 @@
 import {AuthService} from '../../services/auth.service';
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {ToastController} from '@ionic/angular';
+import {ToastController, NavController} from '@ionic/angular';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AppService } from 'src/app/services/app-service.service';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 // import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -18,8 +19,8 @@ export class HomePage implements OnInit {
     // passing IDs
     user_id: any;
 
-    // @ts-ignore
-    constructor(private storage: Storage, private router: Router, private appService: AppService, private route: ActivatedRoute) {
+    // tslint:disable-next-line:max-line-length
+    constructor(private storage: Storage, private router: Router, private appService: AppService, private route: ActivatedRoute, private nativePageTransitions: NativePageTransitions, private navCtrl: NavController) {
     }
 
     ngOnInit(): void {
@@ -37,10 +38,18 @@ export class HomePage implements OnInit {
             console.log('err:', err);
           });
 
-        // this.appService.get('/api/packages?biller_id=' + this.biller_id).subscribe(res => {
 
-        // })
     }
+
+    flipPage() {
+        const options: NativeTransitionOptions = {
+          direction: 'up',
+          duration: 600
+         };
+
+        this.nativePageTransitions.flip(options);
+        this.navCtrl.navigateForward('airtime-purchase');
+      }
 
 
     go() {
@@ -56,7 +65,8 @@ export class HomePage implements OnInit {
     }
 
     doo() {
-        window.location.href = 'https://www.vtpass.com';
+        // window.location.href = 'https://www.vtpass.com';
+        this.router.navigate(['airtime-purchase']);
     }
 
     // paymentDone(event) {

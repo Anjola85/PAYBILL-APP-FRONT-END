@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'ionic', loadChildren: './pages/ionic/ionic.module#IonicPageModule' },
   // tslint:disable-next-line:max-line-length
   { path: 'valid-info/:user_id/:package_name/:package_amount/:biller_id/:package_id/:package_image', loadChildren: './pages/valid-info/valid-info.module#ValidInfoPageModule' },
+  { path: 'airtime-purchase', loadChildren: './pages/airtime-purchase/airtime-purchase.module#AirtimePurchasePageModule' },
 ];
 
 @NgModule({

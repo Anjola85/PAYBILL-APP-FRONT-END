@@ -2,7 +2,7 @@
 
     <ion-grid>
 
-        <ion-row>
+        <!-- <ion-row>
 
             <ion-col>
                 <ion-card style="background-color: orange; height: 210px;">
@@ -24,10 +24,10 @@
                         Send money to your friends and family.
                     </ion-card-content>
                 </ion-card>
-                <!-- <button angular4-paystack [key]="'pk_test_ff8038868aa90a1f32fa379d157a5fbaf8e84890'" [email]="'funmiayinde11@gmail.com'" [amount]="5000000" [ref]="'248738483'" [class]="'btn btn-primary'" (close)="paymentCancel()" (callback)="paymentDone($event)">Pay with Paystack</button> -->
+                <button angular4-paystack [key]="'pk_test_ff8038868aa90a1f32fa379d157a5fbaf8e84890'" [email]="'funmiayinde11@gmail.com'" [amount]="5000000" [ref]="'248738483'" [class]="'btn btn-primary'" (close)="paymentCancel()" (callback)="paymentDone($event)">Pay with Paystack</button>
             </ion-col>
 
-        </ion-row>
+        </ion-row> -->
 
         <ion-row>
             <ion-col (click)="doo()">
@@ -35,7 +35,7 @@
                     <ion-card-header>
                         <ion-card-title style="color: white">Buy Airtime</ion-card-title>
                     </ion-card-header>
-                    <ion-card-content style="color: white">
+                    <ion-card-content style="color: white" (click)="flipPage()">
                         Airtel, Glo, MTN, 9mobile
                     </ion-card-content>
                 </ion-card>

@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Purchase Airtime</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home/:user_id" (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+
+        <ion-row>
+            <ion-col class="font-one ">
+                <p>Top-up :</p>
+            </ion-col>
+            <ion-col style="margin-right: 60px ">
+                <p>{{phoneNumber}}</p>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-list>
+            <ion-item>
+                <ion-label>Mobile Network</ion-label>
+                <ion-select placeholder="Select One ">
+                    <ion-select-option *ngFor="let data of data ">{{data.biller_name}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list> -->
+        <ion-row>
+            <ion-col *ngFor="let data of data ">
+                <ion-card>
+                    <img src="{{data.image}} ">
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <form>
+                <p>Select Amount</p>
+                <div class="value-button" id="decrease" (click)="decreaseValue()" value="Decrease Value">-</div>
+                <span class="currency-input">
+                  <input type="number" id="number" value="{{numBer}}"/>
+                </span>
+                <div class="value-button" id="increase" (click)="increaseValue()" value="Increase Value">+</div>
+            </form>
+        </ion-row>
+
+        <ion-button expand="full">PAY</ion-button>
+
+
+
+    </ion-grid>
+</ion-content>
