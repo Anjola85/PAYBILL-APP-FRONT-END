@@ -67,18 +67,18 @@ export class AirtimePurchasePage implements OnInit {
   }
 
    increaseValue() {
-    let value = parseInt(document.getElementById('number').value, 10);
+    let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
-    document.getElementById('number').value = value;
+    (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
    decreaseValue() {
-    let value = parseInt(document.getElementById('number').value, 10);
+    let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
     value = isNaN(value) ? 0 : value;
     value < 1 ? value = 1 : '';
     value--;
-    document.getElementById('number').value = value;
+    (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
 }

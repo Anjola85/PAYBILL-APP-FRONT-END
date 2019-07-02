@@ -107,8 +107,8 @@ export class PaymentGatewayPage implements OnInit {
       console.log('response:', res);
       if (res.status === true) {
         this.successMessage = res.message;
+        this.navCtrl.navigateForward(['tabs/transactions/']);
         this.presentAlert();
-        this.navCtrl.navigateForward(['tabs/transactions/', this.user_id]);
       }
       if (res.code === 404) {
         this.errorMessage = res.message;

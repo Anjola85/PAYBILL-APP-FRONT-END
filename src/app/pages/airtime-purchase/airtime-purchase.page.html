@@ -19,36 +19,38 @@
             </ion-col>
         </ion-row>
 
-        <!-- <ion-list>
+        <ion-list style="margin-top: 50px;">
             <ion-item>
                 <ion-label>Mobile Network</ion-label>
                 <ion-select placeholder="Select One ">
                     <ion-select-option *ngFor="let data of data ">{{data.biller_name}}</ion-select-option>
                 </ion-select>
             </ion-item>
-        </ion-list> -->
-        <ion-row>
+        </ion-list>
+        <!-- <ion-row>
             <ion-col *ngFor="let data of data ">
                 <ion-card>
                     <img src="{{data.image}} ">
                 </ion-card>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
-        <ion-row>
-            <form>
-                <p>Select Amount</p>
-                <div class="value-button" id="decrease" (click)="decreaseValue()" value="Decrease Value">-</div>
-                <span class="currency-input">
+        <ion-row ion-justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <form>
+                    <p>Select Amount</p>
+                    <div class="value-button" id="decrease" (click)="decreaseValue()" value="Decrease Value">-</div>
+                    <span class="currency-input">
                   <input type="number" id="number" value="{{numBer}}"/>
                 </span>
-                <div class="value-button" id="increase" (click)="increaseValue()" value="Increase Value">+</div>
-            </form>
+                    <div class="value-button" id="increase" (click)="increaseValue()" value="Increase Value">+</div>
+                </form>
+
+                <div>
+                    <ion-button size="medium" type="submit" expand="block" style="margin-top: 50px;">PAY</ion-button>
+                </div>
+            </ion-col>
         </ion-row>
-
-        <ion-button expand="full">PAY</ion-button>
-
-
 
     </ion-grid>
 </ion-content>

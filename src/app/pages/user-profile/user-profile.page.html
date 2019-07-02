@@ -1,40 +1,38 @@
+<ion-content style="margin-top: 0px;" overflow-scroll="true">
 
+    <ion-grid>
+        <div class="list-control">
 
-<ion-content style="margin-top: 0px;">
-
-  <ion-grid>
-      <div class="list-control">
-
-          <div class="circle">
-              <div class="content">
-                <span>
+            <div class="circle">
+                <div class="content">
+                    <span>
                   {{firstnameInitial | uppercase}} {{lastnameInitial | uppercase}}
                 </span>
-              </div>
-          </div>
-          
-          <h3>{{firstname | uppercase}} {{lastname | uppercase}}</h3>
-          <p>View and edit profile</p>
+                </div>
+            </div>
 
-      </div>
-      
-      
-      <div>
-          <h5 class="list-control">Change your password
-              <ion-icon style="margin-left: 180px;" name="arrow-forward"></ion-icon>
-          </h5> 
-      
-          <h5 class="list-control">Invite friends
-              <ion-icon style="margin-left: 270px;" name="arrow-forward"></ion-icon>
-          </h5>
-      
-          <h5 class="list-control">Contact Support
-              <ion-icon style="margin-left: 238px;" name="arrow-forward"></ion-icon>
-          </h5>
-  
-          <h5 class="list-control" [routerLink]="['/login']">Sign out</h5>
-      </div>
-  </ion-grid>
+            <h3>{{firstname | uppercase}} {{lastname | uppercase}}</h3>
+            <p>Edit profile</p>
+
+        </div>
+
+
+        <div>
+            <h5 class="list-control">Change your password
+                <ion-icon style="margin-left: 180px;" name="arrow-forward"></ion-icon>
+            </h5>
+
+            <h5 class="list-control">Invite friends
+                <ion-icon style="margin-left: 270px;" name="arrow-forward"></ion-icon>
+            </h5>
+
+            <h5 class="list-control">Contact Support
+                <ion-icon style="margin-left: 238px;" name="arrow-forward"></ion-icon>
+            </h5>
+
+            <h5 class="list-control" [routerLink]="['/login']">Sign out</h5>
+        </div>
+    </ion-grid>
 
 
 </ion-content>

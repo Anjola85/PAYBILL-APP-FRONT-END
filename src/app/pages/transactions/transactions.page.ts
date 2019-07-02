@@ -54,6 +54,8 @@ export class TransactionsPage implements OnInit {
         this.message = res.message;
       }
     });
+
+
   }
 
 
