@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AppHelper } from '../helper/app-helper';
 import { AppService } from 'src/app/services/app-service.service';
 import {NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import {AirtimePaymentGatewayPage} from '../../modal/airtime-payment-gateway/airtime-payment-gateway.page';
+
 
 @Component({
   selector: 'app-airtime-purchase',
@@ -20,7 +23,8 @@ export class AirtimePurchasePage implements OnInit {
   firstnameInitial;
   lastnameInitial;
 
-  constructor(private appService: AppService, private nativePageTransitions: NativePageTransitions, private navCtrl: NavController) { }
+      // tslint:disable-next-line:max-line-length
+  constructor(private appService: AppService, private nativePageTransitions: NativePageTransitions, private navCtrl: NavController, private router: Router, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.userInfo = AppHelper.retrieve('userInfo');
@@ -37,7 +41,7 @@ export class AirtimePurchasePage implements OnInit {
         console.log('successMessage:', this.message);
         this.data = res['data'];
         for (let i = 0; i < this.data.length; i++) {
-          console.log(`Number of mobile networks ${i}`, this.data[i]);
+          // console.log(`Number of mobile networks ${i}`, this.data[i]);
         }
       }
       if (res.status.false === false) {
@@ -80,5 +84,15 @@ export class AirtimePurchasePage implements OnInit {
     value--;
     (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: AirtimePaymentGatewayPage
+    });
+    return await modal.present();
+  }
+
+
+
 
 }

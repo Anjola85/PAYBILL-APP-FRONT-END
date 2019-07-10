@@ -15,6 +15,7 @@ import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {AppService} from './services/app-service.service';
 import {Angular4PaystackModule} from 'angular4-paystack';
 import {NativePageTransitions} from '@ionic-native/native-page-transitions/ngx';
+// import { AirtimePaymentGatewayPage } from '../../src/app/modal/airtime-payment-gateway/airtime-payment-gateway.page';
 
 export function jwtOptionsFactory(storage) {
     return {

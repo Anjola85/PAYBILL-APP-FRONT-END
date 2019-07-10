@@ -5,14 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AirtimePurchasePage } from './airtime-purchase.page';
-
-
+import { AirtimePaymentGatewayPage } from './airtime-payment-gateway.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AirtimePurchasePage
+    component: AirtimePaymentGatewayPage
   }
 ];
 
@@ -21,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  declarations: [AirtimePurchasePage],
+  declarations: [AirtimePaymentGatewayPage],
+  entryComponents: [AirtimePaymentGatewayPage]
 })
-export class AirtimePurchasePageModule {}
+export class AirtimePaymentGatewayPageModule {}
