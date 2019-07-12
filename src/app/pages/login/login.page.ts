@@ -15,7 +15,7 @@ import {NavController} from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   login: LoginM = new LoginM();
-  sucessMessage;
+  message;
   userInformation: any;
 
 
@@ -32,16 +32,21 @@ export class LoginPage implements OnInit {
     this.appService.post('/api/login', this.login)
         .subscribe(res => {
           console.log('response' , res);
-          if (res.status === true) {
-            this.sucessMessage = res.message;
+          if (res.code === 200) {
+            this.message = res.message;
             this.userInformation = res['data'];
             AppHelper.store('token', res.token);
             AppHelper.store('userInfo', res.data);
             this.userId(user_id);
           }
-
-        }, error => {
-          console.log('error login', error);
+        },
+        err => {
+          console.log('error:', err.error);
+          if (err.error.code === 404) {
+            this.message = err.error.message;
+          } else {
+            this.message = err.error.message;
+          }
         });
   }
 

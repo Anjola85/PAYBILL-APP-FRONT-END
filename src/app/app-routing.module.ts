@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'airtime-purchase', loadChildren: './pages/airtime-purchase/airtime-purchase.module#AirtimePurchasePageModule' },
       // tslint:disable-next-line:max-line-length
   { path: 'airtime-payment-gateway', loadChildren: './modal/airtime-payment-gateway/airtime-payment-gateway.module#AirtimePaymentGatewayPageModule' },
+  { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
+  { path: 'change-password', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' },
 ];
 
 @NgModule({

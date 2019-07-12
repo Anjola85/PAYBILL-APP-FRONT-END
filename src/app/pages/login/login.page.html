@@ -1,9 +1,9 @@
 <ion-content color="primary" padding>
-    <form #loginn (ngSubmit)="doLogin(loginn)">
+    <form (ngSubmit)="doLogin()">
         <ion-grid>
             <ion-row color="primary" justify-content-center>
                 <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-
+                    <p *ngIf="message" style="color: greenyellow">{{message}}</p>
                     <div>
                         <ion-item>
                             <ion-input type="text" name="username" #username="ngModel" [(ngModel)]="login.username" placeholder="Username" style="margin-top: 40px;" required></ion-input>

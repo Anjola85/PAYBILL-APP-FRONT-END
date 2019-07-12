@@ -12,7 +12,6 @@ export class ValidInfoPage implements OnInit {
   isHidden: boolean;
   inputValue: String = '';
   user_information: any;
-  successMessage;
   errorMessage;
   message;
 
