@@ -19,21 +19,25 @@
             </ion-col>
         </ion-row>
 
-        <ion-list style="margin-top: 50px;">
+        <!-- <ion-list style="margin-top: 50px;">
             <ion-item>
                 <ion-label>Mobile Network</ion-label>
                 <ion-select placeholder="Select One ">
-                    <ion-select-option *ngFor="let data of data" (click)="payAirtime(biller_name)">{{data.biller_name}}</ion-select-option>
+                    <ion-select-option *ngFor="let data of data" (click)="onClickNetwork(data._id)">{{data.biller_name}}</ion-select-option>
                 </ion-select>
             </ion-item>
-        </ion-list>
-        <!-- <ion-row>
-            <ion-col *ngFor="let data of data ">
-                <ion-card>
-                    <img src="{{data.image}} ">
-                </ion-card>
-            </ion-col>
-        </ion-row> -->
+        </ion-list> -->
+
+        <ion-row>
+            <ion-card *ngFor="let data of data " (click)="onClickNetwork(data._id, data.biller_name)">
+                <ion-card-header>
+                    <ion-card-title>
+                        {{data.biller_name}}
+                    </ion-card-title>
+                </ion-card-header>
+            </ion-card>
+        </ion-row>
+
 
         <ion-row ion-justify-content-center>
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">

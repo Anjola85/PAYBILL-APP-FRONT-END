@@ -36,9 +36,10 @@ export class ChangePasswordPage implements OnInit {
       if (res.status === true) {
         this.message = res.message;
         this.user_data = res['data'];
-        this.form = document.getElementsByName('passwordChange')[0];
-        this.form.submit();
-        this.form.reset();
+        this.router.navigate(['/tabs/user-profile']);
+        // this.form = document.getElementsByName('passwordChange')[0];
+        // this.form.submit();
+        // this.form.reset();
       }
     },
     err => {

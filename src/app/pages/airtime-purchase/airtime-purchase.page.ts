@@ -17,7 +17,7 @@ export class AirtimePurchasePage implements OnInit {
   message;
   userInfo;
   phoneNumber;
-  numBer = 500;
+  numBer = 100;
   firstname;
   lastname;
   firstnameInitial;
@@ -41,7 +41,7 @@ export class AirtimePurchasePage implements OnInit {
         console.log('successMessage:', this.message);
         this.data = res['data'];
         for (let i = 0; i < this.data.length; i++) {
-          // console.log(`Number of mobile networks ${i}`, this.data[i]);
+          // console.log(`Biller name: ${this.data[i].biller_name}, Biller ID: ${this.data[i]._id}`);
         }
       }
       if (res.status.false === false) {
@@ -50,6 +50,15 @@ export class AirtimePurchasePage implements OnInit {
       }
     });
   }
+
+  onClickNetwork(network_id, biller_name) {
+    console.log('network id:', network_id);
+    console.log('biller_name:', biller_name);
+  }
+
+  // makePayment() {
+  //   this.appService.post('/api/airtimePurchase/' + )
+  // }
 
   goBack() {
     if (this.navCtrl.back) {
@@ -73,7 +82,8 @@ export class AirtimePurchasePage implements OnInit {
    increaseValue() {
     let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
     value = isNaN(value) ? 0 : value;
-    value++;
+    value += 100;
+    return value;
     (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
@@ -81,7 +91,7 @@ export class AirtimePurchasePage implements OnInit {
     let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
     value = isNaN(value) ? 0 : value;
     value < 1 ? value = 1 : '';
-    value--;
+    value -= 100;
     (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
@@ -91,6 +101,8 @@ export class AirtimePurchasePage implements OnInit {
     });
     return await modal.present();
   }
+
+
 
 
 
