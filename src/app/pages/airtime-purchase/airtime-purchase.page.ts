@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AppHelper } from '../helper/app-helper';
 import { AppService } from 'src/app/services/app-service.service';
 import {NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {AirtimePaymentGatewayPage} from '../../modal/airtime-payment-gateway/airtime-payment-gateway.page';
+
 
 
 @Component({
@@ -22,9 +22,14 @@ export class AirtimePurchasePage implements OnInit {
   lastname;
   firstnameInitial;
   lastnameInitial;
+  network_id;
+  transactionObj: any = {};
+  successMessage;
+  buttonActive: boolean;
+
 
       // tslint:disable-next-line:max-line-length
-  constructor(private appService: AppService, private nativePageTransitions: NativePageTransitions, private navCtrl: NavController, private router: Router, private modalCtrl: ModalController) { }
+  constructor(private appService: AppService, private nativePageTransitions: NativePageTransitions, private navCtrl: NavController, private router: Router, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.userInfo = AppHelper.retrieve('userInfo');
@@ -51,56 +56,71 @@ export class AirtimePurchasePage implements OnInit {
     });
   }
 
-  onClickNetwork(network_id, biller_name) {
-    console.log('network id:', network_id);
-    console.log('biller_name:', biller_name);
+
+
+  makePayment(network_id, biller_name) {
+    // console.log('Phone Number:', this.phoneNumber);
+    // console.log('network id:', network_id);
+    // console.log('biller_name:', biller_name);
+    const value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
+    // console.log('amount:', value);
+    // console.log('Transaction reference:', this.makeTransactionReference(10));
+    this.transactionObj = {
+      user_id: this.userInfo._id,
+      network_id: network_id,
+      phone_number: this.phoneNumber,
+      amount: value,
+      transaction_reference: this.makeTransactionReference(10)
+    };
+    console.log('transaction obj:', this.transactionObj);
+    this.appService.post('/api/airtimePurchase', this.transactionObj).subscribe(res => {
+      console.log('response:', res);
+      if (res.status === true) {
+        this.successMessage = res.message;
+        console.log('Successful:', this.successMessage);
+      }
+    }, error => {
+      console.log('error:', error);
+    });
   }
 
-  // makePayment() {
-  //   this.appService.post('/api/airtimePurchase/' + )
-  // }
-
-  goBack() {
-    if (this.navCtrl.back) {
-      const options: NativeTransitionOptions = {
-        direction: 'down',
-        duration: 500,
-        slowdownfactor: -1,
-        slidePixels: 20,
-      };
-      this.nativePageTransitions.slide(options);
-      this.navCtrl.pop();
-    } else {
-      const options: NativeTransitionOptions = {
-        duration: 700
-      };
-      this.nativePageTransitions.fade(options);
-      this.navCtrl.navigateBack('tabs/home');
-    }
-  }
 
    increaseValue() {
     let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
     value = isNaN(value) ? 0 : value;
     value += 100;
-    return value;
     (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
    decreaseValue() {
     let value = parseInt((<HTMLInputElement>document.getElementById('number')).value, 10);
-    value = isNaN(value) ? 0 : value;
-    value < 1 ? value = 1 : '';
-    value -= 100;
-    (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
+      value = isNaN(value) ? 0 : value;
+      if ( value >= 100) {
+        value -= 100;
+      }
+      (<HTMLInputElement>document.getElementById('number')).value = value.toFixed();
   }
 
-  async presentModal() {
-    const modal = await this.modalCtrl.create({
-      component: AirtimePaymentGatewayPage
-    });
-    return await modal.present();
+  makeTransactionReference(length) {
+    let result           = '';
+    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation of payment',
+      subHeader: 'Recipient successfully credited!',
+      buttons: ['Dismiss']
+    });
+    await alert.present();
+  }
+
+
 
 
 

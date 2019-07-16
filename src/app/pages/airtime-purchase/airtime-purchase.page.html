@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>Purchase Airtime</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="home/:user_id" (click)="goBack()"></ion-back-button>
+            <ion-back-button defaultHref="home/:user_id"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -29,11 +29,12 @@
         </ion-list> -->
 
         <ion-row>
-            <ion-card *ngFor="let data of data " (click)="onClickNetwork(data._id, data.biller_name)">
+            <ion-card *ngFor="let data of data " (click)="makePayment(data._id, data.biller_name)" style="margin: 8px;">
                 <ion-card-header>
-                    <ion-card-title>
+                    <!-- <ion-card-title>
                         {{data.biller_name}}
-                    </ion-card-title>
+                    </ion-card-title> -->
+                    <button class="btn btn-primary btn-lg active" style="font-size: 12px;">{{data.biller_name}}</button>
                 </ion-card-header>
             </ion-card>
         </ion-row>
@@ -51,7 +52,7 @@
                 </form>
 
                 <div>
-                    <ion-button size="medium" type="submit" expand="block" style="margin-top: 50px;" [routerLink]="['/airtime-payment-gateway']" (click)="presentModal()">PAY</ion-button>
+                    <ion-button size="medium" type="submit" expand="block" style="margin-top: 50px;" (click)="presentAlert()">PAY</ion-button>
                 </div>
             </ion-col>
         </ion-row>
