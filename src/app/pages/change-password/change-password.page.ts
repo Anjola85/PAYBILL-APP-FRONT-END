@@ -20,6 +20,8 @@ export class ChangePasswordPage implements OnInit {
   user_id: any;
   user_data;
   message;
+  successMessage;
+  errorMessage;
   form;
 
   constructor(private appService: AppService, private navCtrl: NavController, formBuilder: FormBuilder, private router: Router) { }
@@ -34,9 +36,13 @@ export class ChangePasswordPage implements OnInit {
     this.appService.post('/api/user/changePassword/' + this.user_id, this.changePassword).subscribe(res => {
       console.log('response:', res);
       if (res.status === true) {
-        this.message = res.message;
+        this.successMessage = res.message;
+        console.log('successMEssage:', this.successMessage);
         this.user_data = res['data'];
-        this.router.navigate(['/tabs/user-profile']);
+        setTimeout(() => {
+          // tslint:disable-next-line:max-line-length
+          this.router.navigate(['/tabs/user-profile']);
+      }, 2000);
         // this.form = document.getElementsByName('passwordChange')[0];
         // this.form.submit();
         // this.form.reset();
@@ -44,6 +50,8 @@ export class ChangePasswordPage implements OnInit {
     },
     err => {
       console.log('error:', err);
+      this.errorMessage = err.error.message;
+      console.log('Error Message:', this.errorMessage);
     });
   }
 

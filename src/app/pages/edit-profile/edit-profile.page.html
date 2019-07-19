@@ -16,45 +16,56 @@
                     <div>
                         <ion-item>
                             <ion-label>Firstname:</ion-label>
-                            <ion-input type="text" name="firstname" [(ngModel)]="updateProfile.firstname" placeholder="{{firstname}}">
+                            <ion-input type="text" name="firstname" [(ngModel)]="updateProfile.firstname" value="{{firstname}}">
                             </ion-input>
                         </ion-item>
                     </div>
                     <div>
                         <ion-item>
                             <ion-label>Lastname:</ion-label>
-                            <ion-input type="text" name="lastname" [(ngModel)]="updateProfile.lastname" placeholder="{{lastname}}">
+                            <ion-input type="text" name="lastname" [(ngModel)]="updateProfile.lastname" value="{{lastname}}">
                             </ion-input>
                         </ion-item>
                     </div>
                     <div>
                         <ion-item>
                             <ion-label>Username:</ion-label>
-                            <ion-input type="text">{{username}}</ion-input>
+                            <ion-input type="text" style="color:gray">{{username}}</ion-input>
                         </ion-item>
                     </div>
                     <div>
                         <ion-item>
                             <ion-label>Email:</ion-label>
-                            <ion-input type="text">{{email}}</ion-input>
+                            <ion-input type="text" style="color:gray">{{email}}</ion-input>
                         </ion-item>
                     </div>
-                    <div>
+                    <!-- <div>
                         <ion-item>
                             <ion-label>Gender:</ion-label>
                             <ion-input type="text" name="gender" [(ngModel)]="updateProfile.gender" placeholder="{{gender}}"></ion-input>
                         </ion-item>
-                    </div>
-                    <div>
+                    </div> -->
+                    <ion-item style="margin-top: 50px;">
+                        <ion-label>Gender</ion-label>
+                        <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+                            <ion-select-option value="red">Male</ion-select-option>
+                            <ion-select-option value="purple">Female</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <!-- <div>
                         <ion-item>
                             <ion-label>Date of Birth:</ion-label>
                             <ion-input type="text" name="dob" [(ngModel)]="updateProfile.dob" placeholder="{{dob | date}}"></ion-input>
                         </ion-item>
-                    </div>
+                    </div> -->
+                    <ion-item style="margin-top: 50px;">
+                        <ion-label>Date of Birth</ion-label>
+                        <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="dob" [(ngModel)]="updateProfile.dob" placeholder="{{dob | date}}"></ion-datetime>
+                    </ion-item>
                     <div>
                         <ion-item>
                             <ion-label>Phone Number:</ion-label>
-                            <ion-input type="text">{{phoneNumber}} </ion-input>
+                            <ion-input type="text" style="color:gray">{{phoneNumber}} </ion-input>
                         </ion-item>
                     </div>
                     <div>
