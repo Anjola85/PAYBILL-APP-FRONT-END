@@ -55,11 +55,14 @@
                     <ion-grid>
 
                         <ion-row>
+                            <!-- <ion-scroll scrollY="true" direction="y"> -->
                             <ion-card *ngFor="let biller of billers" style="background-color: yellow; width: fit-content" (click)="onClickBiller(biller._id)">
                                 <ion-card-header>
                                     <ion-card-title style="color: black">{{biller.biller_name}}</ion-card-title>
                                 </ion-card-header>
                             </ion-card>
+                            <!-- </ion-scroll> -->
+
                         </ion-row>
 
                     </ion-grid>
@@ -80,27 +83,9 @@
                     <ion-grid>
 
                         <ion-row>
-                            <ion-card style="background-color: white; width: fit-content">
+                            <ion-card *ngFor="let internet of internet" style="background-color: green; width: fit-content" (click)="onClickNetwork(internet._id, internet.image, user_id, internet.biller_name)">
                                 <ion-card-header>
-                                    <ion-card-title style="color: black">SWIFT</ion-card-title>
-                                </ion-card-header>
-                            </ion-card>
-
-                            <ion-card style="background-color: white; width: fit-content">
-                                <ion-card-header>
-                                    <ion-card-title style="color: black">Smile</ion-card-title>
-                                </ion-card-header>
-                            </ion-card>
-
-                            <ion-card style="background-color: blue; width: fit-content">
-                                <ion-card-header>
-                                    <ion-card-title style="color: white">Spectranet</ion-card-title>
-                                </ion-card-header>
-                            </ion-card>
-
-                            <ion-card style="background-color: white; width: fit-content">
-                                <ion-card-header>
-                                    <ion-card-title style="color: black">ipNX</ion-card-title>
+                                    <ion-card-title style="color: whitesmoke">{{internet.biller_name}}</ion-card-title>
                                 </ion-card-header>
                             </ion-card>
                         </ion-row>
@@ -123,21 +108,9 @@
                     <ion-grid>
 
                         <ion-row>
-                            <ion-card style="background-color: white; width: fit-content">
+                            <ion-card style="background-color: white; width: fit-content" *ngFor="let utility of utility" (click)="onClickUtility(user_id, utility.biller_name, utility._id)">
                                 <ion-card-header>
-                                    <ion-card-title style="color: black">EKEDC</ion-card-title>
-                                </ion-card-header>
-                            </ion-card>
-
-                            <ion-card style="background-color: white; width: fit-content">
-                                <ion-card-header>
-                                    <ion-card-title style="color: black">IBEDC</ion-card-title>
-                                </ion-card-header>
-                            </ion-card>
-
-                            <ion-card style="background-color: white; width: fit-content">
-                                <ion-card-header>
-                                    <ion-card-title style="color: black">LCC</ion-card-title>
+                                    <ion-card-title style="color: black">{{utility.biller_name}}</ion-card-title>
                                 </ion-card-header>
                             </ion-card>
                         </ion-row>

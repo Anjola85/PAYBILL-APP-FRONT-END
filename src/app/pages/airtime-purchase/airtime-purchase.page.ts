@@ -26,6 +26,7 @@ export class AirtimePurchasePage implements OnInit {
   transactionObj: any = {};
   successMessage;
   buttonActive: boolean;
+  inputNumber: String = '';
 
 
       // tslint:disable-next-line:max-line-length
@@ -78,6 +79,7 @@ export class AirtimePurchasePage implements OnInit {
       if (res.status === true) {
         this.successMessage = res.message;
         console.log('Successful:', this.successMessage);
+        // this.presentAlert();
       }
     }, error => {
       console.log('error:', error);

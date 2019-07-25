@@ -15,7 +15,8 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 export class HomePage implements OnInit {
     data = '';
     billers: any;
-
+    internet: any;
+    utility: any;
     // passing IDs
     user_id: any;
 
@@ -38,6 +39,24 @@ export class HomePage implements OnInit {
             console.log('err:', err);
           });
 
+        this.appService.get('/api/billers?types=internet').subscribe(res => {
+          console.log('res:', res);
+          if (res) {
+            this.internet = res['data'];
+          }
+        }, err => {
+          console.log('internetError:', err);
+        });
+
+        this.appService.get('/api/billers?types=utility').subscribe(res => {
+          console.log('res:', res);
+          if (res) {
+            this.utility = res['data'];
+          }
+        }, err => {
+          console.log('Utility error:', err);
+        });
+
 
     }
 
@@ -52,16 +71,27 @@ export class HomePage implements OnInit {
       }
 
 
-    go() {
-        this.router.navigateByUrl('https://www.vtpass.com/');
-        window.open('https://www.vtpass.com/', '_self');
-    }
+    // go() {
+    //     this.router.navigateByUrl('https://www.vtpass.com/');
+    //     window.open('https://www.vtpass.com/', '_self');
+    // }
 
 
     onClickBiller(biller_id, user_id) {
         user_id = this.user_id;
         console.log('biller_id:', biller_id);
         this.router.navigate(['/packages/', user_id, biller_id]);
+    }
+
+    onClickNetwork(internet_id, internet_image, user_id, internet_name) {
+      user_id = this.user_id;
+      // console.log('image:', internet_image);
+      this.router.navigate(['/swift-topup', user_id, internet_image, internet_id, internet_name]);
+    }
+
+    onClickUtility(biller_id, user_id, biller_name) {
+      user_id = this.user_id;
+      this.router.navigate(['/utility-packages', biller_id, user_id, biller_name]);
     }
 
     doo() {

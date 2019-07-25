@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>SWIFT TOP UP</ion-title>
+    </ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="home/:user_id"></ion-back-button>
+    </ion-buttons>
+</ion-header>
+
+<ion-content>
+    <form>
+        <ion-grid>
+
+            <ion-row>
+                <ion-col>
+                    <ion-card style="height: 190px;">
+                        <div class="myImage">
+                            <img src="{{internet_image}}">
+                            <!-- <span>₦{{package_amount}}</span> -->
+                        </div>
+                        <ion-card-header>
+                            <ion-card-title style="color: white; margin-left: 200px;">
+                                <h4></h4>
+                            </ion-card-title>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+            <ion-row justify-content-center>
+                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                    <!-- <p *ngIf="errorMessage" style="color:red">{{errorMessage}}</p>
+                  <p *ngIf="successMessage" style="color:green">{{successMessage}}</p> -->
+                    <div>
+                        <ion-item style="margin-top: 10px;">
+                            <ion-label>Customer ID:</ion-label>
+                            <ion-input type="text" required></ion-input>
+                        </ion-item>
+                        <ion-item style="margin-top: 50px;">
+                            <ion-label>Enter Amount:</ion-label>
+                            <ion-input type="text" required></ion-input>
+                        </ion-item>
+
+                        <div>
+                            <ion-button color="danger" size="medium" type="submit" expand="block" style="margin-top: 200px;">
+                                GET {{internet_name}} TOP UP
+                            </ion-button>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

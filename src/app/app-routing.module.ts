@@ -17,6 +17,11 @@ const routes: Routes = [
       // tslint:disable-next-line:max-line-length
   { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'change-password', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' },
+    // tslint:disable-next-line:max-line-length
+  { path: 'swift-topup/:internet_id/:internet_image/:user_id/:internet_name', loadChildren: './pages/internet-topup/swift-topup.module#SwiftTopupPageModule' },
+  { path: 'ekedc', loadChildren: './pages/ekedc/ekedc.module#EkedcPageModule' },
+  // tslint:disable
+  { path: 'utility-packages/:biller_id/:biller_name/:user_id', loadChildren: './pages/utility-packages/utility-packages.module#UtilityPackagesPageModule' }
 ];
 
 @NgModule({
